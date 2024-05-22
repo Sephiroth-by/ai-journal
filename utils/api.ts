@@ -21,6 +21,6 @@ export const updateEntry = async (id: string, content: string) => {
 
   if (response.ok) {
     const data = await response.json()
-    return data.data
+    return data
   }
 }

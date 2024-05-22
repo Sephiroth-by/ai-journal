@@ -1,5 +1,7 @@
+import { analyzeEntry } from '@/utils/ai'
 import { getUserFromClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
+import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const PUT = async (
@@ -20,5 +22,16 @@ export const PUT = async (
     },
   })
 
-  return NextResponse.json({ data: entry })
+  const analysis = await analyzeEntry(content)
+
+  const analysisEntry = await prisma.analysis.update({
+    where: {
+      entryId: entry.id,
+    },
+    data: {
+      ...analysis,
+    },
+  })
+
+  return NextResponse.json({ data: entry, analysis: analysisEntry })
 }

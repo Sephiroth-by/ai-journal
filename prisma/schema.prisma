@@ -35,7 +35,7 @@ model JournalEntry {
   userId String
   user   User   @relation(fields: [userId], references: [id])
 
-  Analysis Analysis?
+  analysis Analysis?
 
   @@unique([userId, id])
 }
@@ -49,9 +49,10 @@ model Analysis {
   summary  String  @db.Text
   color    String
   negative Boolean
+  subject  String
 
   entryId String
-  entry   JournalEntry @relation(fields: [entryId], references: [id])
+  entry   JournalEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
 
   @@unique([entryId])
 }
