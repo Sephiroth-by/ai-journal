@@ -18,6 +18,7 @@ export const POST = async (request: NextRequest) => {
     data: {
       ...analysis,
       entryId: entry.id,
+      userId: user.id,
     },
   })
 

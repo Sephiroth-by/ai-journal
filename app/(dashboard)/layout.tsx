@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React, { ReactNode } from 'react'
 
 const links = [
+  { name: 'Home', href: '/' },
   { name: 'Journals', href: '/journal' },
   { name: 'History', href: '/history' },
 ]
